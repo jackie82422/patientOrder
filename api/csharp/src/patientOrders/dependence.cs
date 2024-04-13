@@ -17,6 +17,7 @@ public static class Dependence
 
         services.AddScoped<IUnitOfWork, UnitOfWork>();
         services.AddTransient<IPatientRepository, PatientRepository>();
+        services.AddTransient<IOrderRepository, OrderRepository>();
         
         services.AddScoped<IPatientOrders, PatientOrders>();
     }

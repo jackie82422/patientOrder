@@ -4,5 +4,5 @@ namespace patientOrders.repository;
 
 public interface IPatientRepository
 {
-    public Task<IEnumerable<Patient>> GetPatients(int pageNumber,int pageSize);
+    public Task<IEnumerable<PatientModel>> GetPatients(int pageNumber,int pageSize);
 }

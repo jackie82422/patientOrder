@@ -4,7 +4,11 @@ namespace patientOrders.service;
 
 public interface IPatientOrders
 {
-     Task<IEnumerable<Patient>> GetPatientsAsync(int pageNumber = 1, int pageSize = 10);
+     Task<IEnumerable<PatientModel>> GetPatientsAsync(int pageNumber = 1, int pageSize = 10);
 
-     Task<Patient> GetPatientAsync(int? patientId, string? patientName);
+     Task<IEnumerable<OrderModel>?> GetOrdersByPatientAsync(string patientId);
+
+     Task<bool> DeleteOrder(string orderId);
+
+     Task<bool> AddOrder(string patientId, string orderContent, string doctorName);
 }

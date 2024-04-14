@@ -26,7 +26,7 @@ Using the `--build` option will build Docker images.
 
 Once the containers are successfully running, you can access the application in your browser. Open your browser and visit the following URL:
 
-- Application: [http://localhost:80](http://localhost:80)
+- Application: [http://localhost:80/swagger/index.html](http://localhost:80/swagger/index.html)
 
 You can now begin using the application!
 

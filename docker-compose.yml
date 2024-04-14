@@ -1,0 +1,23 @@
+version: '3.8'
+networks:
+  default:
+    driver: bridge
+services:
+  dotnet-api:
+    build:
+      context: ./api/csharp/src/patientOrders
+      dockerfile: Dockerfile
+    ports:
+      - "80:10210"
+    depends_on:
+      - mysql-db
+    environment:
+      - ASPNETCORE_URLS=http://0.0.0.0:10210
+      - ASPNETCORE_ENVIRONMENT=Development
+      - SQL_CONNECTION_STRING=Server=mysql-db;Port=3306;Database=patients_db;Uid=app_user;Pwd=app_password;
+
+  mysql-db:
+    build:
+      context: ./dbs
+      dockerfile: Dockerfile
+

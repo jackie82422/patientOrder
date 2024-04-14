@@ -1,20 +1,11 @@
-﻿FROM mcr.microsoft.com/dotnet/aspnet:6.0 AS base
-WORKDIR /app
-EXPOSE 80
-EXPOSE 443
+﻿FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build-env
+WORKDIR /App
 
-FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
-WORKDIR /src
-COPY ["csharp/src/patientOrders/patientOrders.csproj", "patientOrders/"]
-RUN dotnet restore "src/patientOrders/patientOrders.csproj"
 COPY . .
-WORKDIR "/src/patientOrders"
-RUN dotnet build "patientOrders.csproj" -c Release -o /app/build
-
-FROM build AS publish
-RUN dotnet publish "patientOrders.csproj" -c Release -o /app/publish
-
-FROM base AS final
-WORKDIR /app
-COPY --from=publish /app/publish .
+RUN dotnet restore
+RUN dotnet publish -c Debug -o out
+FROM mcr.microsoft.com/dotnet/aspnet:6.0
+WORKDIR /App
+COPY --from=build-env /App/out .
+EXPOSE 10210
 ENTRYPOINT ["dotnet", "patientOrders.dll"]

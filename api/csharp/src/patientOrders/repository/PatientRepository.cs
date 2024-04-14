@@ -15,7 +15,7 @@ public class PatientRepository:IPatientRepository
     public async Task<IEnumerable<PatientModel>> GetPatients(int pageNumber, int pageSize)
     {
         var offset = (pageNumber - 1) * pageSize;
-        var sql = $"SELECT * FROM patients LIMIT {pageSize} OFFSET {offset}";
+        var sql = $"SELECT id, name, birth_date as birthDate, created_by as creator,gender,created_at as createdAt FROM patients where is_deleted = false LIMIT {pageSize} OFFSET {offset} ";
         var patients = await _unitOfWork.Connection.QueryAsync<PatientModel>(sql);
         return patients;
     }

@@ -4,10 +4,10 @@ public class PatientModel
 {
     public string Id { get; set; }
     public string? Name { get; set; }
-    public int BirthDate { get; set; }
-    public Gender Type { get; set; }
-    public int CreatedAt { get; set; }
-    public bool IsDeleted { get; set; }
+    public string? Creator { get; set; }
+    public DateTime BirthDate { get; set; }
+    public Gender Gender { get; set; }
+    public DateTime CreatedAt { get; set; }
 }
 
 public enum Gender
